@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 export const Main = () => {
       
   const[categories, setCategories] = useState(null)
+
+  const [loading, setLoading] = useState(true);
      
       //create a function and inside the function make your request
         const fetchFoodCategories = () => {
@@ -13,6 +15,7 @@ export const Main = () => {
           .then(function(data){
            // console.log({categories})
             setCategories(data.categories)
+            setLoading(false)
           })
         }
       
@@ -55,6 +58,10 @@ export const Main = () => {
               <div className="col-md-12">
                 {/* Categories of menu starts */}
                 <h5 className="mb-3 text-danger">CATEGORIES</h5>
+                {
+                  loading ? <h1 className='text-center'>Loading...</h1>: ""
+                }
+                
                 {/* category item*/}
                     {
                       categories && categories.map(function(cat){
